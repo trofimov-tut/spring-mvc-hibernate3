@@ -53,7 +53,7 @@ public class UserController {
         return "editUser";
     }
 
-    @PostMapping(value = "users/edit")
+    @PostMapping(value = "users/edit/{id}")
     public String edit(@ModelAttribute("user") User user) {
         userService.editUser(user);
         return "redirect:/";

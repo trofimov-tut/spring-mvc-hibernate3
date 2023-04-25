@@ -8,8 +8,8 @@
 <h2>Изменить пользователя</h2>
 <div>
 
-    <form th:action="@{/users/edit}" th:object="${user}" method="post">
-        <input type="hidden" name="id" th:value="${user.getId()}">
+    <form th:action="@{/users/edit/{id}(id=${user.id})}" th:object="${user}" method="post">
+<!--        <input type="hidden" name="id" th:value="${user.getId()}">-->
         <fieldset>
             <legend>Данные пользователя</legend>
             <p>

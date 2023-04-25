@@ -1,7 +1,6 @@
 package web.repository;
 
 import web.model.User;
-
 import java.util.List;
 
 public interface UserRepository {
@@ -14,4 +13,5 @@ public interface UserRepository {
     User getUserById(Long id);
 
     List<User> getAllUsers();
+
 }

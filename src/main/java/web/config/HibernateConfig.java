@@ -13,18 +13,13 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
-
 @PropertySource("classpath:app.properties")
-
 @EnableJpaRepositories("web")
-//@ComponentScan(value = "web")
-
 public class HibernateConfig {
     private static final String PROP_DATABASE_DRIVER = "db.driver";
     private static final String PROP_DATABASE_PASSWORD = "db.password";
@@ -43,17 +38,13 @@ public class HibernateConfig {
         this.env = env;
     }
 
-
-    /************* Start Spring JPA config details **************/
-
-    //@Bean
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
         LocalContainerEntityManagerFactoryBean factoryBean =
                 new LocalContainerEntityManagerFactoryBean();
         factoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
         factoryBean.setDataSource(getDataSource());
-        factoryBean.setPersistenceUnitName("myJpaPersistenceUnit");
+//        factoryBean.setPersistenceUnitName("myJpaPersistenceUnit");
         //factoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         factoryBean.setPackagesToScan(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
         factoryBean.setJpaProperties(getHibernateProperties());
@@ -65,13 +56,11 @@ public class HibernateConfig {
         return new HibernateJpaVendorAdapter();
     }
 
-
     @Bean(name = "transactionManager")
     public PlatformTransactionManager getTransactionManager() {
         return new JpaTransactionManager(getEntityManagerFactoryBean().getObject());
     }
 
-    /************* End Spring JPA config details **************/
     @Bean
     public DataSource getDataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
@@ -88,7 +77,7 @@ public class HibernateConfig {
         properties.put(PROP_HIBERNATE_SHOW_SQL, env.getRequiredProperty(PROP_HIBERNATE_SHOW_SQL));
         properties.put(PROP_HIBERNATE_FORMAT_SQL, env.getRequiredProperty(PROP_HIBERNATE_FORMAT_SQL));
         properties.put(PROP_HIBERNATE_HBM2DDL_AUTO, env.getRequiredProperty(PROP_HIBERNATE_HBM2DDL_AUTO));
-
         return properties;
     }
+
 }

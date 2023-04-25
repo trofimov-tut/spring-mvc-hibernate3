@@ -1,12 +1,10 @@
-package web.repository.imp;
+package web.repository;
 
 import web.model.User;
 import org.springframework.stereotype.Repository;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
-import web.repository.UserRepository;
 
 
 @Repository
